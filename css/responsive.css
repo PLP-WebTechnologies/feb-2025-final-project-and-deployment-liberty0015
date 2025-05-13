@@ -1,0 +1,19 @@
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    header ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header li {
+        margin: 0.5rem 0;
+    }
+
+    #newsletter input {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}

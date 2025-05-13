@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Web Development Basics | DevBlog</title>
+    <style>
+        /* === CSS Styles === */
+        :root {
+            --primary: #3498db;
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+            --gray: #e9ecef;
+            --success: #28a745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--light);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        header {
+            background: var(--dark);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        /* Breadcrumbs */
+        .breadcrumbs {
+            padding: 10px 0;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        /* Blog Content */
+        .blog-header {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .blog-header h1 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .meta {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+        
+        .blog-content {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 40px;
+        }
+        
+        article {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        article img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        h2 {
+            color: var(--dark);
+            margin: 1.5rem 0 1rem;
+            border-bottom: 2px solid var(--gray);
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            margin: 1.2rem 0 0.8rem;
+            color: var(--primary);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        code {
+            background: var(--gray);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        pre {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        /* Sidebar */
+        aside {
+            position: sticky;
+            top: 20px;
+            align-self: start;
+        }
+        
+        .sidebar-widget {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+        
+        .widget-title {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: var(--gray);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* Related Posts */
+        .related-post {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+        
+        .related-post img {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .blog-content {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .blog-header h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Interactive Elements */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                 <ul>
+                    <li class="current"><a href="index.html">Home</a></li>
+                    <li><a href="C:\Users\USER\Desktop\liberty\feb-2025-final-project-and-deployment-liberty0015\about index.html">About</a></li>
+                    <li><a href="C:\Users\USER\Desktop\liberty\feb-2025-final-project-and-deployment-liberty0015\contact index.html">Contact</a></li>
+                    
+                </ul>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <div class="container breadcrumbs">
+        <a href="index.html">Home</a> &raquo; <span>Modern Web Development Basics</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="blog-header">
+            <h1>Learn the Basics of Modern Web Development</h1>
+            <div class="meta">
+                Published on <time datetime="2023-10-15">january 13, 2025</time> by <a href="https://www.facebook.com/profile.php?id=100092196939766">Admin</a>
+            </div>
+        </div>
+
+        <div class="blog-content">
+            <!-- Article Content -->
+            <article>
+                <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Web Development">
+                
+                <p>Modern web development combines semantic HTML5 with responsive CSS3 to create accessible, future-proof websites. In this guide, we'll explore the essential concepts every developer should master.</p>
+                
+                <h2>Semantic HTML5: The Foundation</h2>
+                <p>Semantic HTML provides meaning to your content, helping both browsers and developers understand your page structure:</p>
+                
+                <pre><code>&lt;header&gt;
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+    &lt;article&gt;
+        &lt;h1&gt;Blog Post Title&lt;/h1&gt;
+        &lt;p&gt;Article content...&lt;/p&gt;
+    &lt;/article&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+    &lt;p&gt;Copyright information&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+                
+                <h3>Key Semantic Elements:</h3>
+                <ul>
+                    <li><code>&lt;header&gt;</code> - Introductory content</li>
+                    <li><code>&lt;nav&gt;</code> - Navigation links</li>
+                    <li><code>&lt;main&gt;</code> - Primary content</li>
+                    <li><code>&lt;article&gt;</code> - Self-contained composition</li>
+                    <li><code>&lt;section&gt;</code> - Thematic grouping</li>
+                    <li><code>&lt;footer&gt;</code> - Footer content</li>
+                </ul>
+                
+                <h2>Responsive CSS3: Adapting to All Devices</h2>
+                <p>Responsive design ensures your website looks great on any device:</p>
+                
+                <h3>1. Fluid Layouts</h3>
+                <p>Use percentages or viewport units instead of fixed widths:</p>
+                <pre><code>.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}</code></pre>
+                
+                <h3>2. Flexible Images</h3>
+                <pre><code>img {
+    max-width: 100%;
+    height: auto;
+}</code></pre>
+                
+                <h3>3. Media Queries</h3>
+                <p>Apply different styles at different screen sizes:</p>
+                <pre><code>@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+}</code></pre>
+                
+                <h3>4. Modern Layout Techniques</h3>
+                <p>CSS Grid and Flexbox simplify responsive layouts:</p>
+                <pre><code>.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}</code></pre>
+                
+                <h2>Putting It All Together</h2>
+                <p>Modern web development combines these principles:</p>
+                <ol>
+                    <li>Start with semantic HTML structure</li>
+                    <li>Add base styles for all devices</li>
+                    <li>Enhance with media queries for different viewports</li>
+                    <li>Test on multiple devices</li>
+                </ol>
+                
+                <div class="conclusion">
+                    <h3>Final Thoughts</h3>
+                    <p>Mastering semantic HTML and responsive CSS is the foundation of modern web development. These skills ensure your websites are accessible, maintainable, and future-proof.</p>
+                </div>
+            </article>
+            
+            <!-- Sidebar -->
+            <aside>
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">About the Author</h3>
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Author" style="width: 80px; border-radius: 50%; margin-bottom: 1rem;">
+                    <p>Sarah is a senior web developer with 10+ years of experience creating responsive, accessible websites.</p>
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Tags</h3>
+                    <div class="tags">
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">Responsive</span>
+                        <span class="tag">Web Dev</span>
+                        <span class="tag">Beginners</span>
+                    </div>
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Related Posts</h3>
+                    <div class="related-post">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="CSS Grid">
+                        <a href="#">Mastering CSS Grid Layout</a>
+                    </div>
+                    <div class="related-post">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Flexbox">
+                        <a href="#">Flexbox Complete Guide</a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 DevBlog. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            backToTop.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Syntax highlighting (would use Prism.js in a real project)
+            document.querySelectorAll('pre code').forEach((block) => {
+                block.innerHTML = block.innerHTML
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Header */
+header {
+    background: #35424a;
+    color: #fff;
+    padding: 1rem 0;
+    border-bottom: 3px solid #e8491d;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+}
+
+header ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+
+header li {
+    margin-left: 2rem;
+}
+
+header .highlight, header .current a {
+    color: #e8491d;
+    font-weight: bold;
+}
+
+/* Hero Section */
+#hero {
+    background: url('../images/blog1.jpg') no-repeat center center/cover;
+    color: #fff;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+/* Blog Posts */
+.blog-post {
+    background: #fff;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.blog-post img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.read-more {
+    display: inline-block;
+    background: #e8491d;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Newsletter */
+#newsletter {
+    background: #35424a;
+    color: #fff;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+#newsletter input {
+    padding: 0.5rem;
+    width: 70%;
+}
+
+.button {
+    background: #e8491d;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    background: #35424a;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
